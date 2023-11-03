@@ -1,8 +1,9 @@
 <script lang="ts">
 	import {onMount} from "svelte";
 	import { enhance } from '$app/forms';
+	import type { Job } from "quirrel";
 
-	export let crons: string[];
+	export let crons: Job<any>[];
 
 	let now = new Date();
 
@@ -24,7 +25,8 @@
 	</div>
 
 	<form method="POST" action="?/add" use:enhance>
-		<input type="text" name="cron" />
+		<input type="text" name="id" placeholder="cron id"/>
+		<input type="text" name="cron" placeholder="cron value"/>
 		<button type="submit" aria-label="Add Cron">
 			<svg aria-hidden="true" viewBox="0 0 1 1">
 				<path d="M0,0.5 L1,0.5 M0.5,0 L0.5,1" />
@@ -38,13 +40,13 @@
 			{#each crons as cron}
 				<div class="crons__cron">
 					<form method="POST" action="?/delete" use:enhance>
-						<span class="crons__cron__value">{cron}</span>
-						<input type="hidden" name="cron" value={cron}/>
 						<button type="submit" aria-label="Delete Cron">
 							<svg aria-hidden="true" viewBox="0 0 1 1">
 								<path d="M0,0.5 L1,0.5" />
 							</svg>
 						</button>
+						<input type="hidden" name="cronId" value={cron.id}/>
+						<span class="crons__cron__value">{`${cron.id}: ${cron.repeat?.cron} ${cron.repeat?.cronTimezone}`}</span>
 					</form>
 				</div>
 			{/each}
@@ -101,10 +103,6 @@
 
 	.cron > form > button:hover {
 		background-color: var(--color-bg-1);
-	}
-
-	.crons__cron__value {
-		width: 4em;
 	}
 
 	svg {

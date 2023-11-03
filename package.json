@@ -2,9 +2,10 @@
 	"name": "sveltekit-quirrel-esm",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "QUIRREL_TOKEN=$(cat .quirrel-token.local) QUIRREL_BASE_URL=http://localhost:5173 vite dev --port 5173 --strictPort",
 		"build": "vite build",
-		"preview": "vite preview",
+		"initQuirrel": "node initQuirrel.js",
+		"preview": "QUIRREL_TOKEN=$(cat .quirrel-token.local) QUIRREL_BASE_URL=http://localhost:4173 vite preview --port 4173 --strictPort",
 		"test": "npm run test:integration && npm run test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -34,5 +35,8 @@
 		"vite": "^4.4.2",
 		"vitest": "^0.32.2"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"quirrel": "^1.14.1"
+	}
 }

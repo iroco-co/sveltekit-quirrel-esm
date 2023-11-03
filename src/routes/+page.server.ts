@@ -1,20 +1,38 @@
 import type { Actions } from './$types';
-import {addCron, deleteCron, getCrons} from "$lib/crons";
 import type {PageServerLoad} from "./$types";
+import { getEvents } from "$lib/journal";
+import { queue } from "./quirrel/+server";
 
-export const load: PageServerLoad = () => {
+export const load: PageServerLoad = async () => {
+  const job_list = []
+  for await (const jobs of queue.get()) {
+    for (const job of jobs) {
+      job_list.push(JSON.parse(JSON.stringify(job)))
+    }
+  }
   return {
-    crons: getCrons()
+    crons: job_list,
+    events: getEvents()
   };
 }
 
 export const actions = {
   add: async ({request}) => {
-    const data = await request.formData();
-    addCron(data.get("cron")?.toString());
+    const { id, cron } = Object.fromEntries(await request.formData());
+    const cronAndTz = cron.toString().split(';');
+    await queue.enqueue(
+      {},
+      {
+        id: id.toString(),
+        override: true,
+        repeat: {
+        cron: [cronAndTz[0], cronAndTz.length>1 ? cronAndTz[1] : 'UTC']
+        }
+      }
+    )
   },
   delete: async ({request}) => {
-    const data = await request.formData();
-    deleteCron(data.get("cron")?.toString());
+    const { cronId } = Object.fromEntries(await request.formData());
+    await queue.delete(cronId.toString());
   },
 } satisfies Actions;

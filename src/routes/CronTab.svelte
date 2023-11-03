@@ -33,20 +33,24 @@
 	</form>
 
 	<div class="crons">
-		<h3>Active crons:</h3>
-		{#each crons as cron}
-			<div class="crons__cron">
-				<form method="POST" action="?/delete" use:enhance>
-					<span class="crons__cron__value">{cron}</span>
-					<input type="hidden" name="cron" value={cron}/>
-					<button type="submit" aria-label="Delete Cron">
-						<svg aria-hidden="true" viewBox="0 0 1 1">
-							<path d="M0,0.5 L1,0.5" />
-						</svg>
-					</button>
-				</form>
-			</div>
-		{/each}
+		{#if crons && crons.length > 0}
+			<h3>Active crons:</h3>
+			{#each crons as cron}
+				<div class="crons__cron">
+					<form method="POST" action="?/delete" use:enhance>
+						<span class="crons__cron__value">{cron}</span>
+						<input type="hidden" name="cron" value={cron}/>
+						<button type="submit" aria-label="Delete Cron">
+							<svg aria-hidden="true" viewBox="0 0 1 1">
+								<path d="M0,0.5 L1,0.5" />
+							</svg>
+						</button>
+					</form>
+				</div>
+			{/each}
+		{:else}
+			<h3>No active crons</h3>
+		{/if}
 	</div>
 
 </div>

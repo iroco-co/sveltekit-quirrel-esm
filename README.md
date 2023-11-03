@@ -1,4 +1,5 @@
 # create-svelte
+[![Build app](https://github.com/iroco-co/sveltekit-quirrel-esm/actions/workflows/build.yaml/badge.svg)](https://github.com/iroco-co/sveltekit-quirrel-esm/actions/workflows/build.yaml)
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 

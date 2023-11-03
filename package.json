@@ -6,6 +6,7 @@
 		"build": "vite build",
 		"initQuirrel": "node initQuirrel.js",
 		"preview": "QUIRREL_TOKEN=$(cat .quirrel-token.local) QUIRREL_BASE_URL=http://localhost:4173 vite preview --port 4173 --strictPort",
+		"prod": "QUIRREL_TOKEN=$(cat .quirrel-token.local) QUIRREL_BASE_URL=http://localhost:3000 node build",
 		"test": "npm run test:integration && npm run test:unit",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -21,6 +22,7 @@
 		"@sveltejs/adapter-node": "^1.3.1",
 		"@sveltejs/kit": "^1.20.4",
 		"@types/cookie": "^0.5.1",
+		"@types/luxon": "^3.3.3",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"eslint": "^8.28.0",
@@ -37,6 +39,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"luxon": "^3.4.3",
 		"quirrel": "^1.14.1"
 	}
 }

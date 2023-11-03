@@ -1,15 +1,16 @@
 <script lang="ts">
 	import {onMount} from "svelte";
 	import { enhance } from '$app/forms';
+	import { DateTime } from 'luxon';
 	import type { Job } from "quirrel";
 
 	export let crons: Job<any>[];
 
-	let now = new Date();
+	let now = DateTime.now();
 
 	onMount(() => {
 		const interval = setInterval(() => {
-			now = new Date();
+			now = DateTime.now();
 		}, 1000);
 
 		return () => {
@@ -21,7 +22,7 @@
 <div class="cron">
 
 	<div class="now">
-		<strong>{now}</strong>
+		<strong>{now.toLocaleString(DateTime.DATETIME_FULL_WITH_SECONDS)}</strong>
 	</div>
 
 	<form method="POST" action="?/add" use:enhance>

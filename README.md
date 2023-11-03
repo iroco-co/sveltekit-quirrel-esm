@@ -28,9 +28,9 @@ SyntaxError: The requested module 'luxon' does not provide an export named 'defa
     at async respond (file:///home/dev/src/sveltekit-quirrel-esm/build/server/index.js:3772:22)
     at async Array.ssr (file:///home/dev/src/sveltekit-quirrel-esm/build/handler.js:1221:3)
 ```
+For more information see[this issue](https://github.com/quirrel-dev/quirrel/issues/1165)
 
 ## Creating the project
-
 Created with:
 
 ```bash

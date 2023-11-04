@@ -47,7 +47,7 @@
 							</svg>
 						</button>
 						<input type="hidden" name="cronId" value={cron.id}/>
-						<span class="crons__cron__value">{`${cron.id}: ${cron.repeat?.cron} ${cron.repeat?.cronTimezone}`}</span>
+						<span class="crons__cron__value">{`${cron.id}: ${cron.repeat?.cron} ${cron.repeat?.cronTimezone} (calls: ${cron.repeat?.count})`}</span>
 					</form>
 				</div>
 			{/each}

@@ -1,11 +1,11 @@
 import type { Actions } from './$types';
 import type {PageServerLoad} from "./$types";
 import { getEvents } from "$lib/journal";
-import { queue } from "./quirrel/+server";
+import { _queue } from "./quirrel/+server";
 
 export const load: PageServerLoad = async () => {
   const job_list = []
-  for await (const jobs of queue.get()) {
+  for await (const jobs of _queue.get()) {
     for (const job of jobs) {
       job_list.push(JSON.parse(JSON.stringify(job)))
     }
@@ -20,7 +20,7 @@ export const actions = {
   add: async ({request}) => {
     const { id, cron } = Object.fromEntries(await request.formData());
     const cronAndTz = cron.toString().split(';');
-    await queue.enqueue(
+    await _queue.enqueue(
       {},
       {
         id: id.toString(),
@@ -33,6 +33,6 @@ export const actions = {
   },
   delete: async ({request}) => {
     const { cronId } = Object.fromEntries(await request.formData());
-    await queue.delete(cronId.toString());
+    await _queue.delete(cronId.toString());
   },
 } satisfies Actions;

@@ -1,12 +1,16 @@
-const events: string[] = []
+const events: CbEvent[] = []
 
-export function getEvents(): string[] {
+export function getEvents(): CbEvent[] {
   return events;
 }
 
-export function addEvent(event: string|undefined) {
+export function addEvent(event: CbEvent|undefined) {
   if (event) {
     events.push(event);
   }
 }
 
+export type CbEvent = {
+  ts: Date
+  msg: string
+}

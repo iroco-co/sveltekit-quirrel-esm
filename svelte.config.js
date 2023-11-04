@@ -10,7 +10,10 @@ const config = {
 			handleMissingId: 'ignore',
 			handleHttpError: 'warn'
 		},
-		adapter: adapter()
+		adapter: adapter(),
+		csrf: {
+			checkOrigin: false,
+		}
 	}
 };
 

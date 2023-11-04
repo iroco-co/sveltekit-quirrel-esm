@@ -3,6 +3,7 @@
 	import welcome_fallback from '$lib/images/svelte-welcome.png';
 	import CronTab from "./CronTab.svelte";
 	import type { PageData } from './$types';
+	import Journal from "./Journal.svelte";
 
 	export let data: PageData;
 </script>
@@ -25,6 +26,7 @@
 	</h1>
 
 	<CronTab crons={data.crons} />
+	<Journal events={data.events} />
 </section>
 
 <style>

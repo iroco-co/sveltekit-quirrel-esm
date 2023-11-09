@@ -5,6 +5,7 @@
 		"dev": "QUIRREL_TOKEN=$(cat .quirrel-token.local) QUIRREL_BASE_URL=http://localhost:5173 vite dev --port 5173 --strictPort",
 		"build": "vite build",
 		"initQuirrel": "node initQuirrel.js",
+		"clean": "rm -rf .svelte-kit build && npm cache clean --force",
 		"preview": "QUIRREL_TOKEN=$(cat .quirrel-token.local) QUIRREL_BASE_URL=http://localhost:4173 vite preview --port 4173 --strictPort",
 		"prod": "QUIRREL_TOKEN=$(cat .quirrel-token.local) QUIRREL_BASE_URL=http://localhost:3000 node build",
 		"test": "npm run test:integration && npm run test:unit",

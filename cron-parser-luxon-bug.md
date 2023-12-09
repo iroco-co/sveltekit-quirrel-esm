@@ -35,3 +35,23 @@
                     - replace value :
                         - re
 
+
+we made a small change code javascript: 
+
+```javascript
+const test_re = /import (!{.*) from 'luxon'/
+const test_re2 = /import (.*), (.*) from 'luxon'/
+
+const lineToMatch= "import require$$0$4, { DateTime } from 'luxon'"
+const transformed = lineToMatch.replace(test_re, "import * as $1 from 'luxon'")
+console.log(transformed)
+
+console.log("import { DateTime } from 'luxon'".replace(test_re, "import * as $1 from 'luxon'"))
+//console.log(transformed.replace(test_re2, "import $1 from 'luxon';\nimport $2 from 'luxon';"))
+
+// import require$$0$4, { DateTime } from 'luxon'
+// import * as require$$0$4, { DateTime } from 'luxon'
+
+// import { DateTime } from 'luxon'
+// import { DateTime } from 'luxon'
+```
